@@ -11,32 +11,19 @@ namespace MurdererQuestion
 	{
 		static void Main(string[] args)
 		{
-			var MurdererIsGray = Variable.Bernoulli(0.7).Named("MurdererIsGray");
-			var WeaponIsRevolver = Variable.New<bool>().Named("WeaponIsRevolver");
-			var FoundGraysHair = Variable.New<bool>().Named("FoundGraysHair");
-			var Found2ndHair = Variable.New<bool>().Named("Found2ndHair");
+			Console.Write("Enter init P (Murderer is Man): ");
+			Model.Init(double.Parse(Console.ReadLine().Replace('.', ',')));
 
-			using (Variable.If(MurdererIsGray))
+			for (int i = 0; i < 27; i++)
 			{
-				WeaponIsRevolver.SetTo(Variable.Bernoulli(0.9));
-				FoundGraysHair.SetTo(Variable.Bernoulli(0.5));
-				Found2ndHair.SetTo(Variable.Bernoulli(0.05));
-			}
+				int a = i % 3;
+				int b = i / 3 % 3;
+				int c = i / 9 % 3;
+				if (b == c) continue;
 
-			using (Variable.IfNot(MurdererIsGray))
-			{
-				WeaponIsRevolver.SetTo(Variable.Bernoulli(0.2));
-				FoundGraysHair.SetTo(Variable.Bernoulli(0.05));
-				Found2ndHair.SetTo(Variable.Bernoulli(0.5));
-			}
+				Model.Exec((ObservedBool)a, (ObservedBool)b, (ObservedBool)c);
 
-			InferenceEngine engine = new InferenceEngine();
-			WeaponIsRevolver.ObservedValue = false;
-			FoundGraysHair.ObservedValue = false;
-			Found2ndHair.ObservedValue = true;
-			InferenceEngine.Visualizer = new Microsoft.ML.Probabilistic.Compiler.Visualizers.WindowsVisualizer();
-			engine.ShowFactorGraph = true;
-			Console.WriteLine("MurdererIsGray: " + engine.Infer(MurdererIsGray));
+			}
 			
 			/// 1 фактор граф
 			/// 2 продемострировать примеры
