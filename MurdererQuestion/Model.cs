@@ -15,7 +15,7 @@ namespace MurdererQuestion
 		static Variable<bool> WeaponIsRevolver;
 		static Variable<bool> FoundMansHair;
 		static Variable<bool> FoundWomansHair;
-		static InferenceEngine engine;
+		static InferenceEngine engine = null;
 
 		public static void Init(
 			double initProb = 0.3,
@@ -48,7 +48,7 @@ namespace MurdererQuestion
 			engine = new InferenceEngine();
 		}
 
-		static void set(Variable<bool> variable, ObservedBool observedBool)
+		private static void set(Variable<bool> variable, ObservedBool observedBool)
 		{
 			if (observedBool == ObservedBool.Undef)
 			{
@@ -58,12 +58,17 @@ namespace MurdererQuestion
 			variable.ObservedValue = observedBool == ObservedBool.True;
 		}
 		
-		public static void Exec(
+		public static string Exec(
 			ObservedBool WeaponIsRevolver = ObservedBool.True, 
 			ObservedBool FoundMansHair = ObservedBool.True, 
 			ObservedBool FoundWomansHair = ObservedBool.Undef,
 			bool showGraph = false
 		) {
+			if (engine == null)
+			{
+				throw new Exception("Uninitialed engine!");
+			}
+
 			set(Model.WeaponIsRevolver, WeaponIsRevolver);
 			set(Model.FoundMansHair, FoundMansHair);
 			set(Model.FoundWomansHair, FoundWomansHair);
@@ -92,10 +97,13 @@ namespace MurdererQuestion
 
 			var res = engine.Infer(MurdererIsMan);
 
-			Console.WriteLine("Weapon: " + weapon);
-			Console.WriteLine("Man's hair " + mansHair);
-			Console.WriteLine("Woman's hair " + womansHair);
-			Console.WriteLine("MurdererIsMan: " + res + '\n');
+			string ans = "";
+
+			ans += "Weapon: " + weapon;
+			ans += "Man's hair " + mansHair;
+			ans += "Woman's hair " + womansHair;
+			ans += "MurdererIsMan: " + res + '\n';
+			return ans;
 		}
 	}
 }
