@@ -104,6 +104,7 @@ namespace MurdererQuestion
 			ans += "Woman's hair: " + womansHair + Environment.NewLine;
 			ans += "MurdererIsMan: " + probMan + " %" + Environment.NewLine;
 			ans += "MurdererIsWoman: " + probWoman + " %" + Environment.NewLine;
+	
 			return ans;
 		}
 	}
