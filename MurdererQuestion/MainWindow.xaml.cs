@@ -47,7 +47,14 @@ namespace MurdererQuestion
 
 		private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			Model.Init(initProb);
+			try
+			{
+				Model.Init(initProb);
+			}
+			catch (Exception exception)
+			{
+				MessageBox.Show(exception.Message);
+			}
 		}
 	}
 }

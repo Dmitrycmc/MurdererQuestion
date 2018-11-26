@@ -95,14 +95,15 @@ namespace MurdererQuestion
 			else if (FoundWomansHair == ObservedBool.False) womansHair = "not found!";
 			else womansHair = "no data";
 
-			var res = engine.Infer(MurdererIsMan);
+			string res = engine.Infer(MurdererIsMan).ToString();
+			double probMan = 100 * double.Parse(res.Substring(10, res.Length - 1 - 10));
+			double probWoman = 100 - probMan;
 
-			string ans = "";
-
-			ans += "Weapon: " + weapon;
-			ans += "Man's hair " + mansHair;
-			ans += "Woman's hair " + womansHair;
-			ans += "MurdererIsMan: " + res + '\n';
+			string ans = "Weapon: " + weapon + Environment.NewLine;
+			ans += "Man's hair: " + mansHair + Environment.NewLine;
+			ans += "Woman's hair: " + womansHair + Environment.NewLine;
+			ans += "MurdererIsMan: " + probMan + " %" + Environment.NewLine;
+			ans += "MurdererIsWoman: " + probWoman + " %" + Environment.NewLine;
 			return ans;
 		}
 	}
