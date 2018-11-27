@@ -17,14 +17,20 @@
     </Window.Resources>
 
     <Grid>
-        <TextBlock Text="Weapon is revolver" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="120" Margin="22,23,0,0"/>
+        
+        <TextBlock Text="Init P(Murderer is man)" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="120" Margin="22,23,0,0"/>
         <TextBox Text="{Binding initProb, ElementName=mainWindow, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="120" Margin="150,23,0,0" TextChanged="TextBox_TextChanged"/>
+        
         <TextBlock Text="Weapon is revolver" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="120" Margin="22,53,0,0"/>
         <ComboBox ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedValue="{Binding weaponIsRevolver, ElementName=mainWindow}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="120" Margin="150,53,0,0"/>
+        
         <TextBlock Text="Found man's hair" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="120" Margin="22,83,0,0"/>
         <ComboBox ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedValue="{Binding foundMansHair, ElementName=mainWindow}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="120" Margin="150,83,0,0"/>
+        
         <TextBlock Text="Found woman's hair" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="120" Margin="22,113,0,0"/>
         <ComboBox ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedValue="{Binding foundWomansHair, ElementName=mainWindow}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="120" Margin="150,113,0,0"/>
+        
         <Button Content="Render" HorizontalAlignment="Left" Margin="22,151,0,0" VerticalAlignment="Top" Width="250" Height="40" Click="button_Click"/>
+    
     </Grid>
 </Window>
