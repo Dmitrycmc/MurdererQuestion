@@ -96,14 +96,14 @@ namespace MurdererQuestion
 			else womansHair = "no data";
 
 			string res = engine.Infer(MurdererIsMan).ToString();
-			double probMan = 100 * double.Parse(res.Substring(10, res.Length - 1 - 10));
+			double probMan = Math.Round(100 * double.Parse(res.Substring(10, res.Length - 1 - 10)), 2);
 			double probWoman = 100 - probMan;
 
 			string ans = "Weapon: " + weapon + Environment.NewLine;
 			ans += "Man's hair: " + mansHair + Environment.NewLine;
 			ans += "Woman's hair: " + womansHair + Environment.NewLine;
-			ans += "MurdererIsMan: " + probMan + " %" + Environment.NewLine;
-			ans += "MurdererIsWoman: " + probWoman + " %" + Environment.NewLine;
+			ans += "Murderer is man: " + probMan + " %" + Environment.NewLine;
+			ans += "Murderer is woman: " + probWoman + " %" + Environment.NewLine;
 	
 			return ans;
 		}

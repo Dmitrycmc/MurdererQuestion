@@ -34,6 +34,7 @@ namespace MurdererQuestion
 
 		private void button_Click(object sender, RoutedEventArgs e)
 		{
+
 			try
 			{
 				string ans = Model.Exec(weaponIsRevolver, foundMansHair, foundWomansHair);
